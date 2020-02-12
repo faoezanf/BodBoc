@@ -1,0 +1,54 @@
+2020/02/03 13:09:09 [error] [exception.CException] CException: SiteController has an extra endWidget(CContentDecorator) call in its view. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php:219
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(309): CBaseController->endWidget('CContentDecorat...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/views/layouts/column1.php(6): CBaseController->endContent()
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(126): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Applications/X...', Array, true)
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(787): CBaseController->renderFile('/Applications/X...', Array, true)
+#5 /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/controllers/SiteController.php(32): CController->render('index')
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/index')
+#12 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /Applications/XAMPP/xamppfiles/htdocs/BodBoc/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/BodBoc/index.php?r=site/index
+HTTP_REFERER=http://localhost/BodBoc/index.php?r=site/page&view=about
+---
+2020/02/05 07:44:19 [error] [php] Undefined variable: code (/Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/views/site/error.php:11)
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(872): SiteController->renderFile()
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(785): SiteController->renderPartial()
+#2 /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/controllers/SiteController.php(32): SiteController->render()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(286): SiteController->runAction()
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /Applications/XAMPP/xamppfiles/htdocs/BodBoc/index.php(13): CWebApplication->run()
+REQUEST_URI=/BodBoc/
+in /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/views/site/error.php (11)
+in /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/controllers/SiteController.php (32)
+in /Applications/XAMPP/xamppfiles/htdocs/BodBoc/index.php (13)
+2020/02/05 07:44:31 [error] [php] Undefined variable: code (/Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/views/site/error.php:11)
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(872): SiteController->renderFile()
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(785): SiteController->renderPartial()
+#2 /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/controllers/SiteController.php(32): SiteController->render()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(286): SiteController->runAction()
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /Applications/XAMPP/xamppfiles/htdocs/BodBoc/index.php(13): CWebApplication->run()
+REQUEST_URI=/BodBoc/
+in /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/views/site/error.php (11)
+in /Applications/XAMPP/xamppfiles/htdocs/BodBoc/protected/controllers/SiteController.php (32)
+in /Applications/XAMPP/xamppfiles/htdocs/BodBoc/index.php (13)

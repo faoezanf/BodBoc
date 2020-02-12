@@ -1,0 +1,170 @@
+.napbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom-style: solid;
+    border-bottom-color: #e5e8ec;
+  }
+  
+  .napbar li {
+    float: left;
+  }
+  
+  .napbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 5px 16px;
+    text-decoration: none;
+  }
+  .input-container{
+      background-color: #A9B1BC;
+      padding: 5px 10px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+
+  }
+  #cari{
+    background-color: #A9B1BC;
+    outline-style: none;
+    border: none;
+    color: white;
+  }
+  #cari::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  .icon{
+    color:white;
+  }
+  .activeMenu {
+    margin-left: 100px;
+    color: black;
+    border-bottom-style: solid;
+    border-bottom-color: red;
+    margin-right: 18px;
+  }
+  .activeMenu:hover{
+    color:black;
+  }
+  .admini{
+    color:black;
+  }
+  #cari2{
+    outline-style: none;
+    border:none;
+    margin-left: 20px;
+    width: 180px;
+    height: 25px;
+  }
+  .searchMonitor{
+    display: block;
+    float: right;
+    margin-right: 100px;
+    margin-top:15px;
+    border: none;
+    border-width: 2px;
+    width: 17%;
+    border-radius: 50px;
+    box-shadow: 1px 1px 4px 1px #888888;
+  }
+  .menu{
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  .container{
+    margin-top: 30px;
+  }
+  .itemKonten{
+    display: block;
+    float: right;
+    width: 200px;
+  }
+  /* .col-md-4{
+    border-style: solid;
+    border-color: black;
+  } */
+  .orderbyAktif{
+    background-color: #DF6E6E;
+    color: white;
+    border-radius: 50px;
+    outline-style: none;
+    width: 130px;
+    height: 32px;
+    border:none;
+  }
+  .orderby{
+    margin-top: 50px;
+    margin-left: 120px;
+  }
+  .orderbyNA{
+    width: 130px;
+    height: 32px;
+    border-radius: 50px;
+    outline-style: none;
+    border-width: 1.5px;
+    border-color: black;
+  }
+  .isiKonten{
+    width: 80%;
+    box-shadow: 1px 1px 5px 1px #888888;
+    cursor: pointer;
+    height: 300px;
+  }
+  #kol1{
+    float: right;
+  }
+  #kol2{
+    margin:0 auto;
+  }
+  #jumData{
+    margin-left: 220px;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #888888;
+  }
+
+  .pagination > .active > a {
+    color: white !important;
+    background-color: red !Important;
+    box-shadow: 1px 1px 5px 1px #888888;
+  }
+  .pagination * {
+    border: none !important;
+    color: black;
+  }
+  .pagination > li > a
+{
+    color: black !Important;
+}
+
+
+  #orderbyperson{
+    display:none;
+  }
+
+  .col-md-6{
+    
+  }
+  .col-md-6 .row{
+    box-shadow: 1px 1px 5px 1px #B2B2B2;
+    width:550px;
+  }
+  #gbr{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+
+
+  /* #nama {
+    font-size: 30px;
+  } */
+  /* li a:hover:not(.active) {
+    background-color: #111;
+  } */
+  
+  /* .active {
+    background-color: #4CAF50;
+  } */
