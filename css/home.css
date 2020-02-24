@@ -96,6 +96,7 @@
     width: 130px;
     height: 32px;
     border:none;
+    cursor: default;
   }
   .orderby{
     margin-top: 50px;
@@ -132,9 +133,11 @@
   }
   #cName{
     margin-left: 30px;
+    margin-right: 30px;
   }
   #cDetail{
     margin-left: 10px;
+    margin-right: 30px;
     line-height: 22px;
   }
 
@@ -150,6 +153,9 @@
   .pagination > li > a
 {
     color: black !Important;
+}
+#inputid{
+  display: none;
 }
 
   /* #nama {

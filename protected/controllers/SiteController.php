@@ -32,11 +32,31 @@ class SiteController extends Controller
 		$this->render('index');
 	}
 
-	public function actionByPerson()
+	public function actionByperson()
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('byperson');
+	}
+
+	public function actionDetailP()
+	{
+		$model = new DetailPerson;
+		if(isset($_POST['idperson']))
+		{
+			$model['personid']=$_POST['idperson'];
+		}
+		$this->render('detailp',array('model'=>$model));
+	}
+
+	public function actionDetailC()
+	{
+		$model = new DetailCompany;
+		if(isset($_POST['idcompany']))
+		{
+			$model['companyid']=$_POST['idcompany'];
+		}
+		$this->render('detailc',array('model'=>$model));
 	}
 
 	/**

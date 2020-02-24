@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/home.css">
 <ul class="napbar">
   	<li><a href="#home">Ingenium</a></li>
   	<!-- <li><a href="#news">News</a></li>
@@ -10,12 +11,17 @@
   	</div></li>
 </ul>
 <?php 
-	$sql="select * from BOARD_COMPANY";
-	$command=Yii::app()->db->createCommand($sql)->queryAll();
-	$numRows = 0;
-    foreach($command as $commands){
-		$numRows = $numRows+1;
-	}
+	// $connection=Yii::app()->db;
+	// $sql= 'SELECT * FROM BOARD_COMPANY';
+	// $command=$connection->createCommand($sql);
+	$sql1 = "select count(*) from BOARD_COMPANY";
+	$numRows=Yii::app()->db->createCommand($sql1)->queryScalar();
+	$sql2="select * from BOARD_COMPANY";
+	$command=Yii::app()->db->createCommand($sql2)->queryAll();
+	//$numRows = 0;
+    // foreach($command as $commands){
+	// 	$numRows = $numRows+1;
+	// }
 ?>
 <div class="menu"> 
 	<nobr class="activeMenu">Monitoring BOD / BOC</nobr>
@@ -28,8 +34,8 @@
 </div>
 
 <div class="orderby">
-	<button id="order1" class="orderbyAktif" onclick="bycompany()"><i class="fa fa-building-o"></i> By Company</button> 
-	<button type="submit" id="order2" class="orderbyNA" onclick="byperson()"><i class="fa fa-user"></i> By Person</button>
+	<button id="order1" class="orderbyAktif"><i class="fa fa-building-o"></i> By Company</button> 
+	<button type="submit" id="order2" class="orderbyNA" onclick="location.href = 'http://localhost/BodBoc/?r=site/byperson'"><i class="fa fa-user"></i> By Person</button>
 </div>
 
 <div id="orderbycompany">
@@ -42,10 +48,12 @@
 					echo "<div class='row'>";
 				}
 				echo "
-				<div class='col-md-4'> 
+				<form method='post' action='?r=site/detailc'>
+				<div class='col-md-4' onclick='this.parentNode.submit();'> 
 					<div class='isiKonten' id='kol2'>
 						<div class='text-center'>
 							<img id='logo' class='text-center' src='";echo $commands['LOGO']; echo"' width='70%'>
+							<input id='inputid' name='idcompany' value='"; echo $commands['COMPANY_ID']; echo"'>
 						</div>
 						<p id='cName' > <b>"; echo $commands['COMPANY_NAME_SHORT']; echo "</b></p>
 						<ul id='cDetail'>
@@ -57,17 +65,19 @@
 					</div>
 			
 				</div>
+				</form>
 				";
 				// echo $commands['COMPANY_NAME_SHORT']; 
 				$i = $i+1;
 				$statusData=$statusData+1;
+
 				if($statusData==4 || $i == $numRows){
 					echo "</div>";
 					$statusData=1;
 				}
 			}
 		?>
-
+	</div>
 	<p id="jumData">Total <?php echo $numRows ?> Data</p>
 
 	<div class="text-center">
@@ -80,7 +90,7 @@
 					</a>
 				</li>
 				<li class="page-item active" style="background-color:red"><a class="page-link">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="http://localhost/phpmyadmin">2</a></li>
 				<li class="page-item"><a class="page-link" href="#">3</a></li>
 				<li class="page-item"><a class="page-link" href="#">4</a></li>
 				<li class="page-item"><a class="page-link" href="#">5</a></li>

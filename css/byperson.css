@@ -123,3 +123,9 @@
     margin-bottom: 20px;
     display: inline-block;
   }
+  .namaKaryawan{
+    font-size:17px;
+  }
+  #inputid{
+    display: none;
+  }
