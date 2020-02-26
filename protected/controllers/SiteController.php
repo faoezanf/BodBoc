@@ -44,7 +44,17 @@ class SiteController extends Controller
 		$model = new DetailPerson;
 		if(isset($_POST['idperson']))
 		{
-			$model['personid']=$_POST['idperson'];
+			$sql1 = "select person_name,person_id from BOARD_PERSON WHERE PERSON_ID=".$_POST['idperson'];
+			$command = Yii::app()->db->createCommand($sql1)->queryAll();
+			$stat=1;
+			foreach($command as $commands) {
+				if ($stat==1){
+					$model['personid'] = $_POST['idperson'];
+					$model['personname']=$commands['person_name'];
+					$stat=$stat+1;
+				}
+			}
+			
 		}
 		$this->render('detailp',array('model'=>$model));
 	}

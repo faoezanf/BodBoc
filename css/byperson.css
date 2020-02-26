@@ -97,6 +97,8 @@
   .col-md-6 .row{
     box-shadow: 1px 1px 5px 1px #B2B2B2;
     width:550px;
+    height: 150px;
+    position: relative;
   }
   #jumData{
     margin-left: 190px;
@@ -128,4 +130,12 @@
   }
   #inputid{
     display: none;
+  }
+  .poin2person{
+    padding: 0;
+    margin-left: 15px;
+  }
+  .col-md-10{
+    overflow:auto;
+    max-height: 100%;
   }

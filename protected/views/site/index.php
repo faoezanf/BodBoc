@@ -39,17 +39,17 @@
 </div>
 
 <div id="orderbycompany">
-	<div class="container">
+	<div class="container" id="page">
 		<?php 
 			$statusData=1;
 			$i = 0;
 			foreach($command as $commands){
-				if ($statusData==1){
-					echo "<div class='row'>";
-				}
+				// if ($statusData==1){
+				// 	echo "<div class='row'>";
+				// }
 				echo "
 				<form method='post' action='?r=site/detailc'>
-				<div class='col-md-4' onclick='this.parentNode.submit();'> 
+				<div class='col-md-4 list-group active' onclick='this.parentNode.submit();'> 
 					<div class='isiKonten' id='kol2'>
 						<div class='text-center'>
 							<img id='logo' class='text-center' src='";echo $commands['LOGO']; echo"' width='70%'>
@@ -71,17 +71,22 @@
 				$i = $i+1;
 				$statusData=$statusData+1;
 
-				if($statusData==4 || $i == $numRows){
-					echo "</div>";
-					$statusData=1;
-				}
+				// if($statusData==4 || $i == $numRows){
+				// 	echo "</div>";
+				// 	$statusData=1;
+				// }
 			}
 		?>
 	</div>
 	<p id="jumData">Total <?php echo $numRows ?> Data</p>
 
 	<div class="text-center">
-		<nav aria-label="Page navigation example">
+	<nav aria-label=...>
+      <ul class="pagination pagination-lg">
+        <li id="previous-page"><a href="javascript:void(0)" aria-label=Previous><span aria-hidden=true>&laquo;</span></a></li>
+      </ul>
+    </nav>
+		<!-- <nav aria-label="Page navigation example">
 			<ul class="pagination pagination-lg justify-content-center">
 				<li class="page-item disabled">
 					<a class="page-link" href="" aria-label="Previous">
@@ -90,7 +95,7 @@
 					</a>
 				</li>
 				<li class="page-item active" style="background-color:red"><a class="page-link">1</a></li>
-				<li class="page-item"><a class="page-link" href="http://localhost/phpmyadmin">2</a></li>
+				<li class="page-item"><a class="page-link" href="">2</a></li>
 				<li class="page-item"><a class="page-link" href="#">3</a></li>
 				<li class="page-item"><a class="page-link" href="#">4</a></li>
 				<li class="page-item"><a class="page-link" href="#">5</a></li>
@@ -101,7 +106,7 @@
 					</a>
 				</li>
 			</ul>
-		</nav>
+		</nav> -->
 	</div>
 </div>
 
@@ -120,111 +125,4 @@
 		document.getElementById("orderbyperson").style.display = "block";
 	}
 </script> -->
-
-
-<!--<div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			<div class="itemKonten">
-
-			
-			<div> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/telkomsel.png" width="75%"></div>
-			<p> <b>PT Telkomsel</b></p>
-			<ul>
-				<li>Tier 1</li>
-				<li>CFU Mobile</li>
-				<li>Tipe AP</li>
-				<li>Wewenang Dwiwarna</li>
-				<li>Saham 51% TLKM 49%</li>
-				<li>Singtel</li>
-			</ul>
-			</div>
-    </div>
-    <div class="col-md-4">
-	<div class="itemKonten">
-
-			
-<div class=""> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/telkomsel.png" width="75%"></div>
-<p> <b>PT Telkomsel</b></p>
-<ul>
-	<li>Tier 1</li>
-	<li>CFU Mobile</li>
-	<li>Tipe AP</li>
-	<li>Wewenang Dwiwarna</li>
-	<li>Saham 51% TLKM 49%</li>
-	<li>Singtel</li>
-</ul>
-</div>
-    </div>
-    <div class="col-md-4">
-	<div class="itemKonten">
-
-			
-<div class="text-center"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/telkomsel.png" width="75%"></div>
-<p> <b>PT Telkomsel</b></p>
-<ul>
-	<li>Tier 1</li>
-	<li>CFU Mobile</li>
-	<li>Tipe AP</li>
-	<li>Wewenang Dwiwarna</li>
-	<li>Saham 51% TLKM 49%</li>
-	<li>Singtel</li>
-</ul>
-</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-	<div class="itemKonten">
-
-			
-<div class="text-center"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/telkomsel.png" width="75%"></div>
-<p> <b>PT Telkomsel</b></p>
-<ul>
-	<li>Tier 1</li>
-	<li>CFU Mobile</li>
-	<li>Tipe AP</li>
-	<li>Wewenang Dwiwarna</li>
-	<li>Saham 51% TLKM 49%</li>
-	<li>Singtel</li>
-</ul>
-</div>
-    </div>
-    <div class="col-md-4">
-	<div class="itemKonten">
-
-			
-<div class="text-center"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/telkomsel.png" width="75%"></div>
-<p> <b>PT Telkomsel</b></p>
-<ul>
-	<li>Tier 1</li>
-	<li>CFU Mobile</li>
-	<li>Tipe AP</li>
-	<li>Wewenang Dwiwarna</li>
-	<li>Saham 51% TLKM 49%</li>
-	<li>Singtel</li>
-</ul>
-</div>
-    </div>
-    <div class="col-md-4">
-	<div class="itemKonten">
-
-			
-<div class="text-center"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/telkomsel.png" width="75%"></div>
-<p> <b>PT Telkomsel</b></p>
-<ul>
-	<li>Tier 1</li>
-	<li>CFU Mobile</li>
-	<li>Tipe AP</li>
-	<li>Wewenang Dwiwarna</li>
-	<li>Saham 51% TLKM 49%</li>
-	<li>Singtel</li>
-</ul>
-</div>
-    </div>
-  </div>
-</div>
-
-	<!-- <div class="hasilKonten"> 
-		<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/telkomsel.png" width="15%">
-	</div?> -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/paginationscripts1.js"></script>

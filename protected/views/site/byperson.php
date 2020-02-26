@@ -36,7 +36,7 @@
 </div>
 
 <div id="orderbyperson">
-	<div class="container">
+	<div class="container" id="page">
 		<?php 
 			$statusData=1;
 			$i = 0;
@@ -48,45 +48,75 @@
 
 				echo "
 				<form method='post' action='?r=site/detailp'>
-					<div class='col-md-6' onclick='this.parentNode.submit();'>
+					<div class='col-md-6 list-group active' onclick='this.parentNode.submit();'>
 						<div class='row' style='cursor:pointer'>
 							<div class='col-md-2'>
 								<img id='gbr' src='"; echo Yii::app()->request->baseUrl; echo "/images/person.jpg' width='120%'>
 								<input id='inputid' name='idperson' value='"; echo $commands['PERSON_ID']; echo"'>
 							</div>
-							<div class='col-md-10' style='line-height:35px;'>
+							<div class='col-md-10' style='line-height:32px;'>
 								<p><b class='namaKaryawan'>"; echo $commands['PERSON_NAME']; echo" / "; echo $commands['PERSON_ID']; echo " </b> <br>";
 								$sql3 = "select count(*) from BOARD_ASSIGNMENT where person_id='".$commands['PERSON_ID']."'";
 								$jumKerja=Yii::app()->db->createCommand($sql3)->queryScalar();
 								// echo $jumKerja;
-								$sql4 = "select BOARD_ASSIGNMENT.position_name,BOARD_ASSIGNMENT.company_id,BOARD_COMPANY.company_name_short,BOARD_ASSIGNMENT.band from BOARD_ASSIGNMENT INNER JOIN BOARD_COMPANY ON BOARD_COMPANY.company_id=BOARD_ASSIGNMENT.company_id where person_id='".$commands['PERSON_ID']."';";
+								$sql4 = "select BOARD_ASSIGNMENT.position_name,BOARD_ASSIGNMENT.company_id,BOARD_COMPANY.company_name_short,BOARD_ASSIGNMENT.band, BOARD_ASSIGNMENT.assignment_id
+								from BOARD_ASSIGNMENT INNER JOIN BOARD_COMPANY ON BOARD_COMPANY.company_id=BOARD_ASSIGNMENT.company_id
+								where person_id='".$commands['PERSON_ID']."'";
 								$rows=Yii::app()->db->createCommand($sql4)->queryAll();
-								if ($jumKerja<=3)
-								{
+								// if ($jumKerja<=3)
+								// {
 									// for ($x = 1; $x <= $jumKerja; $x+=1) {
 									// 	// echo "The number is: $x <br>";
 										
 									// }
+									echo "<ul class='poin2person'>";
 									foreach($rows as $row){
+										// ERROR ASSIGNMENT ID NYA ADA YG GAADA TERUS ADA YANG BISA, COBA BIKIN BANYAK PERULANGAN BUAT NYIMPEN ARRAY ASSIGNMENT ID
+										//echo $row['assignment_id']." ";
+										// $sql5="select BOARD_PERIOD.period_start, BOARD_PERIOD.period_end, BOARD_PERIOD.assignment_id from BOARD_PERIOD INNER JOIN BOARD_ASSIGNMENT ON BOARD_ASSIGNMENT.assignment_id=BOARD_PERIOD.assignment_id where BOARD_PERIOD.assignment_id=".$row['assignment_id'];
+										// $rows2=Yii::app()->db->createCommand($sql5)->queryAll();
+										// // $statt=1;
+										// foreach($rows2 as $row2){
+										// 	// if($statt=1) {
+										// 		$pAwal = $row2['period_start'][0].$row2['period_start'][1].$row2['period_start'][2].$row2['period_start'][3];
+										// 		if($row2['period_end'][0]=='R'){
+										// 			$pAkhir = $row2['period_end'][strlen($row2['period_end'])-4].$row2['period_end'][strlen($row2['period_end'])-3].$row2['period_end'][strlen($row2['period_end'])-2].$row2['period_end'][strlen($row2['period_end'])-1];
+										// 		} else {
+										// 			$pAkhir = $row2['period_end'];
+										// 		}
+										// 		$statt=$statt+1;
+										// 	// }
+										// }
+										// // $pAwal = $row['period_start'][0].$row['period_start'][1].$row['period_start'][2].$row['period_start'][3];
+										// // if($row['period_end'][0]=='R'){
+										// // 	$pAkhir = $row['period_end'][strlen($row['period_end'])-4].$row['period_end'][strlen($row['period_end'])-3].$row['period_end'][strlen($row['period_end'])-2].$row['period_end'][strlen($row['period_end'])-1];
+										// // } else {
+										// // 	$pAkhir = $row['period_end'];
+										// // }
 										$in = $row['position_name']." PT. ".$row['company_name_short']." (".$row['band'].")";
-										$out = strlen($in) > 50 ? substr($in,0,50)."..." : $in;
-										echo $out;
-										echo "<br>";
+										// $out = strlen($in) > 50 ? substr($in,0,50)."..." : $in;
+										// echo $out;
+										// echo "<br>";
+										echo "<li>".$in."</li>";
 									}
-								} else 
-								{
-									$stat=1;
-									foreach($rows as $row){
-										if ($stat<=3){
-											$in = $row['position_name']." PT. ".$row['company_name_short']." (".$row['band'].")";
-											$out = strlen($in) > 50 ? substr($in,0,50)."..." : $in;
-											echo $out;
-											echo  "<br>";
-											$stat=$stat+1;
-										}
-									}
-									//echo "hehehehe";
-								}
+									echo "</ul>";
+								// } else 
+								// {
+								// 	$stat=1;
+								// 	echo "<ul class='poin2person'>";
+								// 	foreach($rows as $row){
+								// 		if ($stat<=3){
+								// 			$in = $row['position_name']." PT. ".$row['company_name_short']." (".$row['band'].")";
+								// 			// $out = strlen($in) > 50 ? substr($in,0,50)."..." : $in;
+								// 			// echo $out;
+								// 			// echo  "<br>";
+								// 			echo "<li>".$in."</li>";
+								// 			$stat=$stat+1;
+								// 		}
+								// 	}
+								// 	echo "</ul>";
+								// 	//echo "hehehehe";
+								// }
 								
 								// Director of HCM PT Telkomsel (I: 2018-2020) <br>
 								// Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
@@ -98,169 +128,27 @@
 					</div>
 				</form>
 				";
-
-				// echo $commands['COMPANY_NAME_SHORT']; 
 				$i = $i+1;
 				$statusData=$statusData+1;
 
 				if($statusData==3 || $i == $numRows){
 					echo "</div>";
-					echo "<br> <br>";
+					// echo "<br> <br>";
 					$statusData=1;
 				}
+				// echo "<br> <br>";
 			}
 		?>
 		</div>
-		<!-- <div class="row">
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-						<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br> <br>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br> <br>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br> <br>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br> <br>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="row" style="cursor:pointer">
-					<div class="col-md-2">
-					<img id="gbr" src="<?php echo Yii::app()->request->baseUrl; ?>/images/person.jpg" width="120%">
-					</div>
-					<div class="col-md-10" style="line-height:35px;">
-						<p style="font-size:17px"><b>Kurniawan Adina K / 930311 </b> <br>
-						Director of HCM PT Telkomsel (I: 2018-2020) <br>
-						Komisaris Utama PT. Telkom Sigma(I: 2018-2020) <br>
-						Komisaris PT. Metranet (I: 2018-2020) </p>
-					</div>
-				</div>
-			</div>
-		</div> -->
 	</div>
 	<p id="jumData">Total <?php echo $numRows ?> Data</p>
 	<div class="text-center">
-	<nav aria-label="Page navigation example">
+	<nav aria-label=...>
+      <ul class="pagination pagination-lg">
+        <li id="previous-page"><a href="javascript:void(0)" aria-label=Previous><span aria-hidden=true>&laquo;</span></a></li>
+      </ul>
+    </nav>
+	<!-- <nav aria-label="Page navigation example">
 		<ul class="pagination pagination-lg justify-content-center">
 			<li class="page-item disabled">
 				<a class="page-link" href="" aria-label="Previous">
@@ -280,6 +168,8 @@
 				</a>
 			</li>
 	</ul>
-	</nav>
+	</nav> -->
 </div>
 </div>
+
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/paginationscripts2.js"></script>

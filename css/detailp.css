@@ -1,0 +1,70 @@
+.napbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom-style: solid;
+    border-bottom-color: #e5e8ec;
+  }
+  
+  .napbar li {
+    float: left;
+  }
+  
+  .napbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 5px 16px;
+    text-decoration: none;
+  }
+  .input-container{
+    background-color: #A9B1BC;
+    padding: 5px 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+}
+#cari{
+    background-color: #A9B1BC;
+    outline-style: none;
+    border: none;
+    color: white;
+  }
+  #cari::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  .icon{
+    color:white;
+  }
+  #judulPage{
+      font-size: 25px;
+  }
+  .mainPerson{
+    box-shadow: 1px 1px 5px 1px #B2B2B2;
+  }
+  .namaKaryawan{
+      font-size: 20px;
+  }
+  .col-md-2 img{
+      margin-top:20px;
+      margin-bottom:20px;
+  }
+  .col-md-10 p{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      line-height: 25px;
+  }
+  .rJabatan{
+    box-shadow: 1px 1px 5px 1px #B2B2B2;
+  }
+    .border-right {
+        border-right: 2px solid #B2B2B2;
+    }
+    .border-top{
+        border-top: 2px solid #B2B2B2;
+    }
+    .periode{
+        color: #9c9c9c;
+    }
