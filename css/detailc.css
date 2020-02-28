@@ -1,0 +1,134 @@
+.napbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom-style: solid;
+    border-bottom-color: #e5e8ec;
+  }
+  
+  .napbar li {
+    float: left;
+  }
+  
+  .napbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 5px 16px;
+    text-decoration: none;
+  }
+  .input-container{
+    background-color: #A9B1BC;
+    padding: 5px 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+}
+#cari{
+    background-color: #A9B1BC;
+    outline-style: none;
+    border: none;
+    color: white;
+  }
+  #cari::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  .icon{
+    color:white;
+  }
+    #judulPage{
+        font-size: 25px;
+    }
+    .headInfo{
+        box-shadow: 1px 1px 5px 1px #B2B2B2;
+        margin
+    }
+    .border-right {
+        border-right: 2px solid #B2B2B2;
+    }
+      .col-md-8{
+          padding-top: 14px;
+          padding-left: 30px;
+      }
+      .namaCompany{
+          font-size: 26px;
+      }
+      .infoCompany{
+          font-size: 16px;
+      }
+      .tierCompany{
+          top : 15px;
+          right: 15px;
+          width: 33px;
+          max-width: 33px;
+          position: absolute;
+      }
+      .tierNote{
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        font-size: 12px;
+        transform: translate(-50%, -50%);
+        color: white;
+      }
+
+      .col-md-6 {
+        padding: 0;
+        padding-left: 30px;
+        margin-top: 30px;
+      }
+      .col-md-6 .row{
+        box-shadow: 1px 1px 5px 1px #B2B2B2;
+        width:100%;
+        height: 150px;
+        overflow: auto;
+      }
+    
+      #gbr{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: inline-block;
+      }
+      #kosong{
+        opacity: 0%;
+      }
+      #fukomUtama{
+        background-color: #f09d9a;
+      }
+      #fuDIGITAL{
+        background-color: #b9fcb5;
+      }
+      #fuENTERPRISE {
+        background-color: #fdf764;
+      }
+      #fuHCM{
+        background-color: #ef92e1;
+      }
+      #fuMOBILE{
+        background-color: #abc7fa;
+      }
+      #fuWIB {
+        background-color: #e1faab;
+      }
+      .col-md-12{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        box-shadow: 1px 1px 5px 1px #B2B2B2;
+        color: #8b8b8b;
+        
+      }
+      .col-md-4{
+        display: flex;
+      }
+      .kotak{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+      }
+      #newRow{
+        margin-top: 10px;
+      }

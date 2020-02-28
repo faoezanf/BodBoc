@@ -29,7 +29,7 @@
 </div>
 
 <div class="searchMonitor">
-	<input id="cari2" type="text" placeholder="Search...">
+	<input id="cari2" type="text" placeholder="Search..." onkeyup="searchname()">
 	<i class="fa fa-search icon2"></i>
 </div>
 
@@ -126,3 +126,4 @@
 	}
 </script> -->
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/paginationscripts1.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/searchCompany.js"></script>

@@ -4,6 +4,7 @@ class DetailPerson extends CFormModel
 {
 	public $personid;
 	public $personname;
+	public $retireddates;
 	// public $email;
 	// public $subject;
 	// public $body;
@@ -16,7 +17,7 @@ class DetailPerson extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-			array('personid,personname', 'required'),
+			array('personid,personname,retireddates', 'required'),
 		);
 	}
 

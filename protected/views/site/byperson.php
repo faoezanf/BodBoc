@@ -15,9 +15,9 @@
 	// $connection=Yii::app()->db;
 	// $sql= 'SELECT * FROM BOARD_COMPANY';
 	// $command=$connection->createCommand($sql);
-	$sql1 = "select count(DISTINCT PERSON_ID) from BOARD_PERSON WHERE PERSON_ID<>'' and PERSON_ID<>'NON TELKOM'";
+	$sql1 = "select count(DISTINCT PERSON_ID) from BOARD_ASSIGNMENT WHERE PERSON_ID<>'' and PERSON_ID<>'NON TELKOM' and year(endda)=9999 and person_id<>'EXTERNAL' and person_id<>'COMPUDYNE' and person_id<>'PELINDO'";
 	$numRows=Yii::app()->db->createCommand($sql1)->queryScalar();
-	$sql="select * from BOARD_PERSON WHERE PERSON_ID<>'' and PERSON_ID<>'NON TELKOM' GROUP BY PERSON_ID ORDER BY PERSON_NAME ASC";
+	$sql="select * from BOARD_ASSIGNMENT WHERE PERSON_ID<>'' and PERSON_ID<>'NON TELKOM' and year(endda)=9999 and person_id<>'EXTERNAL' and person_id<>'COMPUDYNE' and person_id<>'PELINDO' GROUP BY PERSON_ID ORDER BY PERSON_NAME ASC";
 	$command=Yii::app()->db->createCommand($sql)->queryAll();
 ?>
 <div class="menu"> 
@@ -56,12 +56,12 @@
 							</div>
 							<div class='col-md-10' style='line-height:32px;'>
 								<p><b class='namaKaryawan'>"; echo $commands['PERSON_NAME']; echo" / "; echo $commands['PERSON_ID']; echo " </b> <br>";
-								$sql3 = "select count(*) from BOARD_ASSIGNMENT where person_id='".$commands['PERSON_ID']."'";
+								$sql3 = "select count(*) from BOARD_ASSIGNMENT where person_id='".$commands['PERSON_ID']."' and year(endda)=9999 and person_id<>'EXTERNAL' and person_id<>'COMPUDYNE' and person_id<>'PELINDO'";
 								$jumKerja=Yii::app()->db->createCommand($sql3)->queryScalar();
 								// echo $jumKerja;
 								$sql4 = "select BOARD_ASSIGNMENT.position_name,BOARD_ASSIGNMENT.company_id,BOARD_COMPANY.company_name_short,BOARD_ASSIGNMENT.band, BOARD_ASSIGNMENT.assignment_id
 								from BOARD_ASSIGNMENT INNER JOIN BOARD_COMPANY ON BOARD_COMPANY.company_id=BOARD_ASSIGNMENT.company_id
-								where person_id='".$commands['PERSON_ID']."'";
+								where person_id='".$commands['PERSON_ID']."' and year(BOARD_ASSIGNMENT.endda)=9999 and person_id<>'EXTERNAL' and person_id<>'COMPUDYNE' and person_id<>'PELINDO'";
 								$rows=Yii::app()->db->createCommand($sql4)->queryAll();
 								// if ($jumKerja<=3)
 								// {
@@ -71,7 +71,7 @@
 									// }
 									echo "<ul class='poin2person'>";
 									foreach($rows as $row){
-										// ERROR ASSIGNMENT ID NYA ADA YG GAADA TERUS ADA YANG BISA, COBA BIKIN BANYAK PERULANGAN BUAT NYIMPEN ARRAY ASSIGNMENT ID
+
 										//echo $row['assignment_id']." ";
 										// $sql5="select BOARD_PERIOD.period_start, BOARD_PERIOD.period_end, BOARD_PERIOD.assignment_id from BOARD_PERIOD INNER JOIN BOARD_ASSIGNMENT ON BOARD_ASSIGNMENT.assignment_id=BOARD_PERIOD.assignment_id where BOARD_PERIOD.assignment_id=".$row['assignment_id'];
 										// $rows2=Yii::app()->db->createCommand($sql5)->queryAll();
@@ -93,7 +93,27 @@
 										// // } else {
 										// // 	$pAkhir = $row['period_end'];
 										// // }
-										$in = $row['position_name']." PT. ".$row['company_name_short']." (".$row['band'].")";
+
+										$sql5= "select period_start from board_period where assignment_id=".$row['assignment_id'];
+										$pStart=Yii::app()->db->createCommand($sql5)->queryScalar();
+
+										if ($pStart!=''){
+											$pStart=$pStart[0].$pStart[1].$pStart[2].$pStart[3];
+										}
+
+										$sql6= "select period_end from board_period where assignment_id=".$row['assignment_id'];
+										$pEnd=Yii::app()->db->createCommand($sql6)->queryScalar();
+
+										if ($pEnd!=''){
+											if($pEnd[0]=='R'){
+												$pEnd = $pEnd[strlen($pEnd)-4].$pEnd[strlen($pEnd)-3].$pEnd[strlen($pEnd)-2].$pEnd[strlen($pEnd)-1];
+											} elseif($pEnd[0]=='2'){
+												$pEnd = $pEnd[0].$pEnd[1].$pEnd[2].$pEnd[3];
+											}
+										}
+
+										$period = $pStart." - ". $pEnd;
+										$in = $row['position_name']." PT. ".$row['company_name_short']." (".$row['band']." ".$period.")";
 										// $out = strlen($in) > 50 ? substr($in,0,50)."..." : $in;
 										// echo $out;
 										// echo "<br>";

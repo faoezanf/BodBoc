@@ -55,17 +55,18 @@
     outline-style: none;
     border:none;
     margin-left: 20px;
-    width: 180px;
-    height: 25px;
+    min-width: 100px;
+    min-height: 25px;
   }
   .searchMonitor{
     display: block;
     float: right;
-    margin-right: 100px;
+    margin-right: 150px;
     margin-top:15px;
     border: none;
     border-width: 2px;
-    width: 17%;
+    width: 200px;
+    min-width: 100px;
     border-radius: 50px;
     box-shadow: 1px 1px 4px 1px #888888;
   }
