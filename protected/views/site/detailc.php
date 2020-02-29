@@ -67,7 +67,7 @@
                 <?php 
                     if ($jumlahBand!=0) {
                         for ($x = 0; $x < count($band); $x++) {
-                        $sql11 = "select count(band) from BOARD_ASSIGNMENT WHERE company_id=".$model['companyid']." and band='".$band[$x]."'";
+                        $sql11 = "select count(band) from BOARD_ASSIGNMENT WHERE company_id=".$model['companyid']." and band='".$band[$x]."' and year(endda)=9999";
                         $terisi = Yii::app()->db->createCommand($sql11)->queryScalar();
                         echo $band[$x]." ".$jumBand[$x]." terisi ".$terisi.", ";
                     }
