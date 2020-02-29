@@ -30,7 +30,27 @@
                 $stat=0;
                 foreach($command as $commands){
                     if($stat==0){
-                        
+                        $sql8 = "select count(*) from BOARD_POSITION WHERE COMPANY_ID=".$model['companyid']." and band<>'' GROUP BY band";
+                        $jumlahBand = Yii::app()->db->createCommand($sql8)->queryScalar();
+
+                        if ($jumlahBand==1){
+                            $sql9 = "select band, count(band) from BOARD_POSITION WHERE COMPANY_ID=".$model['companyid']." and band<>'' GROUP BY band";
+                            $bnd= Yii::app()->db->createCommand($sql9)->queryAll();
+                            foreach($bnd as $bnds){
+                                $band[0] = $bnds['band'];
+                                $jumBand[0] = $bnds['count(band)'];
+                            }
+                        } else if($jumlahBand>1){
+                            $i = 0;
+                            $sql10 = "select band, count(band) from BOARD_POSITION WHERE COMPANY_ID=".$model['companyid']." and band<>'' GROUP BY band";
+                            $bnd = Yii::app()->db->createCommand($sql10)->queryAll();
+                            
+                            foreach($bnd as $bnds){
+                                $band[$i] = $bnds['band'];
+                                $jumBand[$i] = $bnds['count(band)'];
+                                $i = $i+1;
+                            }
+                        }
                 
             ?>
             <div class='tierCompany'>
@@ -43,7 +63,19 @@
                 <div class='infoCompany'>- Kepemilikan Saham : <?php echo $commands['KEPEMILIKAN_SAHAM'] ?><br>
                 - Bidang Usaha      : <?php echo $commands['BIDANG_USAHA'] ?><br>
                 - CFU / FU          : <?php echo $commands['CFU_FU'] ?><br>
-                - Jumlah Pengurus   : <br> </div>
+                - Jumlah Pengurus   : 
+                <?php 
+                    if ($jumlahBand!=0) {
+                        for ($x = 0; $x < count($band); $x++) {
+                        $sql11 = "select count(band) from BOARD_ASSIGNMENT WHERE company_id=".$model['companyid']." and band='".$band[$x]."'";
+                        $terisi = Yii::app()->db->createCommand($sql11)->queryScalar();
+                        echo $band[$x]." ".$jumBand[$x]." terisi ".$terisi.", ";
+                    }
+
+                    }
+                    
+                ?>
+                <br> </div>
             </p>
             <?php 
                     $stat=$stat+1;

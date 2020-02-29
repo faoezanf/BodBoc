@@ -23,38 +23,62 @@
         </div>
         <div class='col-md-10'>
             <?php 
-                $sql1= "select YEAR(ENDDA) as endda, YEAR(BEGDA) as begda, position_name, company_id from BOARD_ASSIGNMENT WHERE person_id=".$model['personid'];
+                $sql1= "select YEAR(ENDDA) as endda, YEAR(BEGDA) as begda, position_name, company_id, assignment_type_id from BOARD_ASSIGNMENT WHERE person_id=".$model['personid']." and YEAR(ENDDA)=9999";
                 $command=Yii::app()->db->createCommand($sql1)->queryAll();
+
+                $sql8 = "select count(*) from BOARD_ASSIGNMENT WHERE person_id=".$model['personid']." and YEAR(ENDDA)=9999";
+                $jumKerja=Yii::app()->db->createCommand($sql8)->queryScalar();
+
                 $i = 0;
 
                 foreach($command as $commands){
-                    if($i==0){
-                        $begda = $commands['begda'];
-                        $enda = $commands['endda'];
+                    if($jumKerja==1){
                         // $periode = str($begda).str($endda);
                         $position = $commands['position_name'];
                         $idcom = $commands['company_id'];
+                        $assignment_id=$commands['assignment_type_id'];
+                    }else if ($jumKerja>1) {
+                        $posi[$i]=$commands['position_name'];
+                        $idc[$i]=$commands['company_id'];
+                        $ass_id[$i]=$commands['assignment_type_id'];
                         $i = $i+1;
-                    }
-                    else {
-                        if($commands['begda']<$commands['endda']){
-                            $begda = $commands['begda'];
-                            $enda = $commands['endda'];
-                            // $periode = str($begda).str($endda);
-                            $position = $commands['position_name'];
-                            $idcom = $commands['company_id'];
-                        }
-                        $i = $i+1;
+                    } else {
+                        $position = '';
+                        $idcom = '';
                     }
                 }
+
+                if(isset($position)==false and $jumKerja>1){
+                    $position = $posi[0];
+                    $idcom = $idc[0];
+                    $assignment_id = $ass_id[0];
+                    if ($ass_id[0]!=1) {
+                        for ($x = 0; $x < count($posi); $x++) {
+                            if ($ass_id[$x] == 1){
+                                $position = $posi[$x];
+                                $idcom = $idc[$x];
+                                $assignment_id = $ass_id[$x];
+                            }
+                        }
+                    }
+                }
+        
                 $sql2 = "select company_name_short from BOARD_COMPANY where company_id=".$idcom;
                 $company =Yii::app()->db->createCommand($sql2)->queryScalar();
+
+                $sql9= "select period_start from board_period where assignment_id=".$assignment_id;
+                $pStart=Yii::app()->db->createCommand($sql9)->queryScalar();
+
+                $sql10= "select period_end from board_period where assignment_id=".$assignment_id;
+                $pEnd=Yii::app()->db->createCommand($sql10)->queryScalar();
+
+                $period = $pStart." - ". $pEnd;
             ?>
             <p>
                 <b class="namaKaryawan"><?php echo $model['personname']?> / <?php echo $model['personid']?></b> <br>
                 <?php echo $position." PT. ".$company?><br>
                 Tanggal Pensiun : <?php echo $model['retireddates']?> <br>
-                Periode : <br>
+                Periode : <?php echo $period?><br>
                 Rp. xxxxx
             </p>
         </div>
@@ -77,48 +101,101 @@
         </div>
     </div> -->
 
-    <div id="DemoCarousel" class="carousel slide" data-interval="2000" data-ride="carousel">
+    <?php 
+        // for ($x = 0; $x < 5; $x++) {
+        //     $a[$x] = $x;
+        // }
+        // array_splice($a, 3, 1);
+        // for ($x = 0; $x < count($a); $x++) {
+        //     echo $a[$x].' ';
+        // }
+        // echo '<br>';
+        // echo count($a);
+        if($jumKerja>1){
+            for ($x = 0; $x < count($posi); $x++) {
+                if ($posi[$x] == $position) {
+                    array_splice($posi, $x, 1);
+                    array_splice($idc, $x, 1);
+                    array_splice($ass_id, $x, 1);
+                    break;
+                }
+            }
+            echo "
+            <div id='DemoCarousel' class='carousel slide' data-interval='7000' data-ride='carousel'>
+            
+            <div class='carousel-inner'>";
+            for ($x = 0; $x < count($posi); $x++) {
+                if ($x==0){
+                    $kelas = 'active';
+                } else {
+                    $kelas = '';
+                }
 
-            <ol class="carousel-indicators">
-                <li data-target="#DemoCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#DemoCarousel" data-slide-to="1"></li>
-                <li data-target="#DemoCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="item active">
-                    <h2>Slide 1</h2>
-                    <div class="carousel-caption">
-                        <h3>This is the First Label</h3>
-                        <p>The Content of the First Slide goes in here</p>
+                $sql13 = "select company_name_short from BOARD_COMPANY where company_id=".$idc[$x];
+                $company =Yii::app()->db->createCommand($sql13)->queryScalar();
+
+                $sql11= "select period_start from board_period where assignment_id=".$ass_id[$x];
+                $pStart=Yii::app()->db->createCommand($sql11)->queryScalar();
+
+                $sql12= "select period_end from board_period where assignment_id=".$ass_id[$x];
+                $pEnd=Yii::app()->db->createCommand($sql12)->queryScalar();
+
+                $period = $pStart." - ". $pEnd;
+
+                echo "
+                <div class='item ".$kelas."'>
+                    <div class='carousel-caption'>
+                        <h3>Rangkap Jabatan ".($x+1)."</h3>
+                        <img id='logoCompany' src='"; echo Yii::app()->request->baseUrl; echo"/images/telkomsel.png' width='40%'>
+                        <p>".$posi[$x]." PT. ".$company." <br>
+                        Periode : ".$period." <br>
+                        Rp. xxx.xxxx,-
+                        </p>
                     </div>
                 </div>
-                <div class="item">
-                    <h2>Slide 2</h2>
-                    <div class="carousel-caption">
-                        <h3>This is the Second Label</h3>
-                        <p>The Content of the second Slide goes in here</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <h2>Slide 3</h2>
-                    <div class="carousel-caption">
-                        <h3>This is the Third Label</h3>
-                        <p>The Content of the Third Slide goes in here</p>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control left" href="#DemoCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="carousel-control right" href="#DemoCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
-        </div>
+                ";
+            }
+                // <div class='item active'>
+                //     <h2>Slide 1</h2>
+                //     <div class='carousel-caption'>
+                //         <img src='"; echo Yii::app()->request->baseUrl; echo"/images/telkomsel.png' width='40%'>
+                //         <h3>This is the First Label</h3>
+                //         <p>The Content of the First Slide goes in here</p>
+                //     </div>
+                // </div>
+                // <div class='item'>
+                //     <h2>Slide 2</h2>
+                //     <div class='carousel-caption'>
+                //         <h3>This is the Second Label</h3>
+                //         <p>The Content of the second Slide goes in here</p>
+                //     </div>
+                // </div>
+                // <div class='item'>
+                //     <h2>Slide 3</h2>
+                //     <div class='carousel-caption'>
+                //         <h3>This is the Third Label</h3>
+                //         <p>The Content of the Third Slide goes in here</p>
+                //     </div>
+                // </div>
+            echo "</div>";
+            if ($jumKerja>2) {
+                echo "
+                <a class='carousel-control left' href='#DemoCarousel' data-slide='prev'>
+                    <span class='glyphicon glyphicon-chevron-left'></span>
+                </a>
+                <a class='carousel-control right' href='#DemoCarousel' data-slide='next'>
+                    <span class='glyphicon glyphicon-chevron-right'></span>
+                </a>
+                ";
+            echo "</div>";
+            }
+        }
+    ?>
+    
 
 
 
     <br> <br>
-    <div class='col-md-12 border-top'>
         <br>
         <?php 
             $sql3 = "select * from BOARD_ASSIGNMENT where year(endda)<year(begda) and person_id=".$model['personid'];
@@ -130,6 +207,7 @@
             $stat=1;
             foreach($row as $rows){
                 if($stat==1){
+                    echo "<div class='col-md-12 border-top'> </div> <br>";
                     echo "<p> Riwayat Jabatan <br>";
                     echo "<ol id='riwJab'>";
                 }
@@ -162,6 +240,4 @@
             </ol>
 
         </p> -->
-
-    </div>
 </div>
