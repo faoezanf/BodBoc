@@ -31,7 +31,7 @@
 </div>
 
 <div class="orderby">
-	<button id="order1" class="orderbyNA" onclick="location.href = 'http://localhost/BodBoc/?r=site/index'"><i class="fa fa-building-o"></i> By Company</button> 
+	<button id="order1" class="orderbyNA" onclick="location.href = '<?php echo Yii::app()->request->baseUrl?>/?r=site/index'"><i class="fa fa-building-o"></i> By Company</button> 
 	<button id="order2" class="orderbyAktif"><i class="fa fa-user"></i> By Person</button>
 </div>
 
